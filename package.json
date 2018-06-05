@@ -1,22 +1,21 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
+  "name": "jkap-mapkitjs-demo",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "description": "A basic demo of MapKit JS",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+  "author": "jae kaplan <me@jkap.io>",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.2"
   },
   "engines": {
     "node": "8.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
+    "url": "https://glitch.com/edit/#!/jkap-mapkitjs-demo"
   },
   "license": "MIT",
   "keywords": [

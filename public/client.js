@@ -1,3 +1,4 @@
+/* global mapkit */
 (async function() {
   mapkit.init({
     authorizationCallback: done =>

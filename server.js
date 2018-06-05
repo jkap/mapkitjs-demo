@@ -4,9 +4,9 @@
 // init project
 var express = require("express");
 var app = express();
+const jwt = require("jsonwebtoken");
 
-// we've started you off with Express,
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+const cert = new Buffer(process.env.BASE64_KEY, "base64").toString("utf8");
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
@@ -17,7 +17,17 @@ app.get("/", function(request, response) {
 });
 
 app.get("/token", function(request, response) {
-  response.send(process.env.KEY);
+  const payload = {
+    iss: process.env.ISSUER,
+    origin: "https://jkap-mapkitjs-demo.glitch.me"
+  };
+  
+  const token = jwt.sign(payload, cert, {
+    expiresIn: "1h",
+    algorithm: "ES256",
+    keyid: process.env.KEY_ID
+  });
+  response.send(token);
 });
 
 // listen for requests :)
