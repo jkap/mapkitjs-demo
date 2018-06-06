@@ -1,12 +1,12 @@
-// server.js
-// where your node app starts
-
-// init project
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
 const jwt = require("jsonwebtoken");
 
-const cert = new Buffer(process.env.BASE64_KEY, "base64").toString("utf8");
+const tokenConfig = {
+  cert: new Buffer(process.env.BASE64_KEY, "base64").toString("utf8"),
+  iss: process.env.ISSUER,
+  keyid: process.env.KEY_ID
+};
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
@@ -17,20 +17,22 @@ app.get("/", function(request, response) {
 });
 
 app.get("/token", function(request, response) {
+  const { cert, iss, keyid } = tokenConfig;
+
   const payload = {
-    iss: process.env.ISSUER,
+    iss,
     origin: "https://jkap-mapkitjs-demo.glitch.me"
   };
-  
+
   const token = jwt.sign(payload, cert, {
-    expiresIn: "1h",
+    expiresIn: "10m",
     algorithm: "ES256",
-    keyid: process.env.KEY_ID
+    keyid
   });
   response.send(token);
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
+const listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
