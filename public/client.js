@@ -73,12 +73,15 @@ async function getDirectionsAndDrawRoute({ origin, destination, map }) {
 
 function drawRoute(route, { map }) {
   const lineStyle = new mapkit.Style({
-    lineWidth: 4,
+    lineWidth: 4
   });
   // const lines = route.path.map(
   //   points => new mapkit.PolylineOverlay(points, { style: lineStyle })
   // );
-  const line = new mapkit.PolylineOverlay(route.path.reduce((points, pts) => points.concat(pts), []), {style: lineStyle})
+  const line = new mapkit.PolylineOverlay(
+    route.path.reduce((points, pts) => points.concat(pts), []),
+    { style: lineStyle }
+  );
 
   map.showItems([line]);
 }

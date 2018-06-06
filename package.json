@@ -4,6 +4,7 @@
   "description": "A basic demo of MapKit JS",
   "main": "server.js",
   "scripts": {
+    "format": "prettier --write server.js public/*",
     "start": "node server.js"
   },
   "author": "jae kaplan <me@jkap.io>",
